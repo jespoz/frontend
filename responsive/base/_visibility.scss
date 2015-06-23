@@ -1,0 +1,25 @@
+@each $size, $screen-size in $breakpoints{
+	@media screen and (max-width: $screen-size - 1){
+		.from-#{$size}{
+			display: none;
+		}
+	}
+	@media screen and (min-width: $screen-size){
+		.from-#{$size}{
+			display: block;
+		}
+	}
+}
+
+@each $size, $screen-size in $breakpoints{
+	@media screen and (max-width: $screen-size - 1){
+		.to-#{$size}{
+			display: block;
+		}
+	}
+	@media screen and (min-width: $screen-size){
+		.to-#{$size}{
+			display: none;
+		}
+	}
+}

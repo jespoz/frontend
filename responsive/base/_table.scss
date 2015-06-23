@@ -1,0 +1,45 @@
+.group.base-table{
+	display: table;
+
+	& > .box {
+		float   : none;
+		display : table-cell;
+	}
+
+	&.middle > .box{
+		vertical-align: middle;
+	}
+
+	&.top > .box {
+		vertical-align: top;
+	}
+
+	&.bottom > .box {
+		vertical-align: bottom;
+	}
+}
+
+@each $size, $screen-size in $breakpoints{
+	@media all and (min-width: $screen-size){
+		.group.#{$size}-table{
+			display: table;
+
+			& > .box {
+				float   : none;
+				display : table-cell;
+			}
+
+			&.middle > .box{
+				vertical-align: middle;
+			}
+
+			&.top > .box {
+				vertical-align: top;
+			}
+
+			&.bottom > .box {
+				vertical-align: bottom;
+			}
+		}
+	}
+}

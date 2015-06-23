@@ -1,0 +1,10 @@
+.separator {
+	&:before {
+		border-left: solid 1px #F2F2F2;
+		content: '';
+		height: 70%;
+		margin-top: 3px;
+		position: absolute;
+		right: 5%;
+	}
+}

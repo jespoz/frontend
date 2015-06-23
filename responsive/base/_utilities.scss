@@ -1,0 +1,44 @@
+.center-box{
+	display: block;
+	clear: both;
+	float: none !important;
+	margin: 0 auto !important;
+}
+
+.center-text,
+.center-content {
+	text-align: center;
+}
+
+.left-text,
+.left-content {
+	text-align: left ;
+}
+
+.right-text,
+.right-content {
+	text-align: right;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.no-padding.group > .box,
+.group > .no-padding {
+	padding: 0 !important;
+}
+
+.padding {
+	padding-left: ($box--separation / 2);
+	padding-right: ($box--separation / 2);
+}
+
+.double-padding {
+	padding-left: $box--separation;
+	padding-right: $box--separation;
+}

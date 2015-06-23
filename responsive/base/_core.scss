@@ -1,0 +1,72 @@
+.group {
+	position   : relative;
+	max-width  : $group--max-width;
+	width      : 100%;
+	margin     : 0 auto;
+
+	&.total {
+		max-width : 100% !important;
+	}
+
+	&:before, &:after {
+		content : "";
+		display : table;
+		width   : 100%;
+		clear   : both;
+	}
+
+	.box {
+		float         : left;
+		margin        : 0;
+		padding-left  : ($box--separation / 2);
+		padding-right : ($box--separation / 2);
+		width         : 100%;
+		
+		&:last-child{
+			float: right;
+		}
+	}
+
+	.box.total {
+		float   : none;
+		display : table;
+
+		&:before, &:after {
+			content : "";
+			display : table;
+			width   : 100%;
+			clear   : both;
+		}
+	}
+}
+
+@for $i from 1 through 20 {
+	.group .base-#{$i*5}{
+		width: unquote($i*5 + "%");
+	}
+}
+
+@each $fraction-name, $fraction in $fractions{
+	@for $i from 1 through $fraction{
+		.group .base-#{$i}-#{$fraction}{
+			width: (100% / $fraction) * $i; 
+		}
+	}
+}
+
+@each $size, $screen-size in $breakpoints{
+	@media all and (min-width: $screen-size){
+		@for $i from 1 through 20 {
+			.group .box.#{$size}-#{$i*5}{
+				width: unquote($i*5 + "%");
+			}
+		}
+		@each $fraction-name, $fraction in $fractions{
+			@for $i from 1 through $fraction{
+				.group .box.#{$size}-#{$i}-#{$fraction}{
+					width: (100% / $fraction) * $i; 
+				}
+			}
+		}
+	}
+}

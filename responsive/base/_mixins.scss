@@ -1,0 +1,92 @@
+@mixin to($size){
+	@if map-has-key($breakpoints,$size){
+		@media screen and (max-width: map-get($breakpoints,$size) - 1){
+			@content;
+		}
+	} @else {
+		 @media screen and (max-width: $size){
+			@content;
+		}
+	}
+}
+
+@mixin from($size){
+	@if map-has-key($breakpoints,$size){
+		@media screen and (min-width: map-get($breakpoints,$size)){
+			@content;
+		}
+	} @else {
+		 @media screen and (min-width: $size){
+			@content;
+		}
+	}
+}
+
+@mixin from-to($from,$to){
+	@if map-has-key($breakpoints,$desde) and map-has-key($breakpoints,$hasta){
+		@media screen and (min-width: map-get($breakpoints,$from)) and (max-width: map-get($breakpoints,$to) - 1){
+			@content;
+		}
+	} @else if map-has-key($breakpoints,$from) and not map-has-key($breakpoints,$to){
+		@media screen and (min-width: map-get($breakpoints,$ftom)) and (max-width: $to) {
+			@content;
+		}
+	} @else if not map-has-key($breakpoints,$from) and map-has-key($breakpoints,$to) {
+		@media screen and (min-width: $from) and (max-width: map-get($breakpoints,$to) - 1){
+			@content;
+		}
+	} @else {
+		@media screen and (min-width: $from) and (max-width: $to){
+			@content;
+		}
+	}
+}
+
+@mixin grid($items,$columns,$separation:2%){
+	// por si el contenedor es un ul
+	@if $items == li {
+		margin     : 0;
+		padding    : 0;
+		list-style : none; 
+
+		li {
+			margin-left: 0;
+		}
+	}
+
+	&:before, &:after {
+		clear   : both;
+		content : " ";
+		display : table;
+		width   : 100%;
+	}
+
+	& > #{$items}, & > .#{$items}{
+		float          : left;
+		width          : (100% - $separation * ($columns - 1)) / $columns;
+		margin-right   : $separation;
+		margin-bottom  : $separation;
+		vertical-align : top;
+
+		&:nth-child(#{$columns}n){
+			margin-right : 0;
+			clear        : right;
+		}
+
+		&:nth-child(#{$columns}n+1){
+			clear        : left;
+		}
+	}
+}
+
+@mixin padding($numbers){
+	padding-left: ($box--separation / 2) * $numbers;
+	padding-right: ($box--separation / 2) * $numbers;
+}
+
+@mixin proportion($h,$v,$width:100%){
+	width          : $width;
+	height         : 0;
+	overflow       : hidden;
+	padding-bottom : $width * ($v/$h);
+}
